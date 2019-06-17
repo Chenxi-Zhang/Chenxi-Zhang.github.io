@@ -44,7 +44,8 @@ __webpack_require__.r(__webpack_exports__);
 var BlogService = /** @class */ (function () {
     function BlogService(http) {
         this.http = http;
-        this.baseUrl = 'https://api.github.com/repos/zcxzcx100/zcxzcx100.github.io/contents';
+        this.baseUrl = 'https://api.github.com/repos/Chenxi-Zhang/Chenxi-Zhang.github.io/contents';
+        this.iconBaseUrl = 'https://raw.githubusercontent.com/Chenxi-Zhang/Chenxi-Zhang.github.io/master';
         //   private token = 'a5cdf3332b933c89d578f34ca1d0947e6d62cd2d';
         this.blogSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.blogToDisplay = this.blogSubject.asObservable();
@@ -56,11 +57,44 @@ var BlogService = /** @class */ (function () {
     };
     BlogService.prototype.getBlog = function (pathToBlog) {
         var _this = this;
-        var url = this.baseUrl
-            + (pathToBlog ? ('/' + pathToBlog.join('/')) : '');
+        var url = [this.baseUrl].concat(pathToBlog).join('/');
         this.http.get(url).subscribe(function (b) {
             _this.blogSubject.next(b);
         });
+    };
+    BlogService.prototype.buildPath = function (url) {
+        return url.split('/').slice(1);
+    };
+    BlogService.prototype.isDir = function (blog) {
+        return blog.type === 'dir';
+    };
+    BlogService.prototype.getBlogIconUrl = function (parser, blog) {
+        return this._getIcon(parser, blog);
+    };
+    BlogService.prototype.getOpenFolderIconUrl = function (parser) {
+        return this._getOpenFolderIcon(parser);
+    };
+    BlogService.prototype.getIconParser = function () {
+        var url = this.iconBaseUrl + '/icons.json';
+        return this.http.get(url);
+    };
+    BlogService.prototype._getIcon = function (parser, blog) {
+        var def;
+        if (this.isDir(blog)) {
+            def = parser.folder;
+        }
+        else {
+            var names = blog.name.split('.');
+            var ext = '';
+            if (names.length !== 1) {
+                ext = names[names.length - 1];
+            }
+            def = parser.fileExtension[ext] || parser.file;
+        }
+        return (parser.iconDefinition[def]).iconPath;
+    };
+    BlogService.prototype._getOpenFolderIcon = function (parser) {
+        return parser.iconDefinition[parser.folderExpanded].iconPath;
     };
     BlogService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -127,7 +161,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n</div>\n\n<div class=\"container\">\n    <router-outlet></router-outlet>\n</div>\n<div class=\"container\">\n    <app-blog-content></app-blog-content>\n</div>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Chenxi's notes!\n  </h1>\n</div>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-3\">\n      <router-outlet></router-outlet>\n    </div>\n    <div class=\"col-9\">\n      <app-blog-content></app-blog-content>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -158,7 +192,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.title = 'github-pages';
     }
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -297,7 +330,7 @@ var BlogContentComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>The blogs:</h2>\n<ul *ngFor=\"let b of blogs\">\n    <div (click)=\"select(b)\" class=\"hover-click\">{{b.name}}</div>\n</ul>\n"
+module.exports = "<h2>The blogs:</h2>\n<ul class=\"list-group\">\n  <li class=\"list-group-item active\" *ngIf=\"thisUrl.length>1\">\n    <div (click)=\"back()\">\n      <img *ngIf=\"iconParser\" [src]=\"loadOpenFolderIcon()\" alt=\"\">\n      <p>{{thisUrl[thisUrl.length-1]}}</p>\n    </div>\n  </li>\n  <li class=\"list-group-item\" [class.active]=\"selectedBlogName === b.name\" *ngFor=\"let b of blogs\">\n    <div (click)=\"select(b)\" >\n      <img *ngIf=\"iconParser\" [src]=\"loadIcon(b)\" alt=\"\"> \n      <p>{{b.name}}</p>\n    </div>\n  </li>\n</ul>\n"
 
 /***/ }),
 
@@ -336,9 +369,15 @@ var BlogComponent = /** @class */ (function () {
         this.router = router;
     }
     BlogComponent.prototype.ngOnInit = function () {
-        this.thisUrl = window.location.pathname.split('/').slice(1);
+        var _this = this;
+        this.blogService.blogToDisplay.subscribe(function (b) {
+            _this.selectedBlogName = b.name;
+        });
+        this.blogService.getIconParser().subscribe(function (psr) {
+            _this.iconParser = psr;
+        });
+        this.thisUrl = this.blogService.buildPath(window.location.pathname);
         this.loadBlogs(this.thisUrl);
-        // this.render(['SQL', 'tutorial_01_DDL-DML.md']);
     };
     BlogComponent.prototype.loadBlogs = function (path) {
         var _this = this;
@@ -346,8 +385,18 @@ var BlogComponent = /** @class */ (function () {
             _this.blogs = bs.slice();
         });
     };
+    BlogComponent.prototype.loadIcon = function (blog) {
+        if (this.iconParser) {
+            return this.blogService.getBlogIconUrl(this.iconParser, blog);
+        }
+    };
+    BlogComponent.prototype.loadOpenFolderIcon = function () {
+        if (this.iconParser) {
+            return this.blogService.getOpenFolderIconUrl(this.iconParser);
+        }
+    };
     BlogComponent.prototype.select = function (blog) {
-        if (blog.type === 'dir') {
+        if (this.blogService.isDir(blog)) {
             this.thisUrl.push(blog.name);
             this.router.navigate(this.thisUrl.slice());
             this.loadBlogs(this.thisUrl);
@@ -355,6 +404,11 @@ var BlogComponent = /** @class */ (function () {
         else {
             this.render(this.thisUrl.concat([blog.name]));
         }
+    };
+    BlogComponent.prototype.back = function () {
+        this.thisUrl.pop();
+        this.router.navigate(this.thisUrl);
+        this.loadBlogs(this.thisUrl);
     };
     BlogComponent.prototype.render = function (path) {
         this.blogService.getBlog(path);
@@ -436,7 +490,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /data/github-pages/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /data/src/main.ts */"./src/main.ts");
 
 
 /***/ })

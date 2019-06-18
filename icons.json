@@ -555,7 +555,7 @@
 		},
 		"_f_moleculer": {
 			"iconPath": "./icons/moleculer.png"
-		},
+		}
 	},
 	"file": "_file",
 	"folder": "_folder",

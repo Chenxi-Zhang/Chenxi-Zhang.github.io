@@ -1,7 +1,7 @@
 # Create table with diff data types
 
 ## Number types:
-```MySQL
+```sql
 DROP TABLE IF EXISTS table_int;
 CREATE TABLE table_int
 (
@@ -52,7 +52,7 @@ SELECT bin(t_bit1), bin(t_bit8) FROM table_bit;
 ```
 
 ## Date and time types
-```MySQL
+```sql
 DROP TABLE IF EXISTS table_datetime;
 CREATE TABLE table_datetime
 (
@@ -65,7 +65,7 @@ t_year YEAR
 ```
 
 ### Insert record
-```MySQL
+```sql
 INSERT INTO table_datetime
 (t_date, t_datetime, t_timestamp, t_time, t_year)
 VALUES
@@ -80,7 +80,7 @@ YYYYMMDDHHMMSS / YYMMDDHHMMSS / YYYYMMDD/ YYMMDD
 ```
 
 ## String types
-```MySQL
+```sql
 DROP TABLE IF EXISTS table_char;
 CREATE TABLE table_char
 (
@@ -115,7 +115,7 @@ t_varbinary VARBINARY(10)
 ```
 
 ### Insert record
-```MySQL
+```sql
 INSERT INTO table_char
 (t_char, t_varchar)
 VALUES
@@ -136,7 +136,7 @@ SELECT *, HEX(t_binary), HEX(t_varbinary) FROM table_binary;
 ```
 
 ## Enum type
-```MySQL
+```sql
 DROP TABLE IF EXISTS table_enum;
 CREATE TABLE table_enum
 (
@@ -144,7 +144,7 @@ gender enum('M', 'F')
 );
 ```
 ### Insert record
-```MySQL
+```sql
 INSERT INTO table_enum
 (gender)
 VALUES
@@ -157,7 +157,7 @@ SELECT * FROM table_enum;
 ```
 
 ## Set type
-```MySQL
+```sql
 DROP TABLE IF EXISTS table_set;
 CREATE TABLE table_set
 (
@@ -165,7 +165,7 @@ t_set SET('a', 'bb', 'ccc', 'dddd')
 );
 ```
 ### Insert record
-```MySQL
+```sql
 INSERT INTO table_set
 (t_set)
 VALUES

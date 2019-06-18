@@ -1,7 +1,7 @@
 # Lock
 
 ## Syntax
-```MySQL
+```sql
 LOCK TABLES
     tbl_name [AS alias] {READ [LOCAL] | [LOW_PRIORITY] WRITE}
     [, tbl_name [AS alias] {READ [LOCAL] | [LOW_PRIORITY] WRITE}] ...
@@ -21,7 +21,7 @@ e.g.
 ---
 # Transaction
 ## Syntax
-```MySQL
+```sql
 START TRANSACTION | BEGIN [WORK]
 COMMIT [WORK] [AND [NO] CHAIN] [[NO] RELEASE]
 ROLLBACK [WORK] [AND [NO] CHAIN] [[NO] RELEASE]
@@ -40,7 +40,7 @@ e.g.
 
 # Distributed transaction
 ## Syntax
-```MySQL
+```sql
 XA {START|BEGIN} xid [JOIN|RESUME]
     
     xid: gtrid [, bqual [, formatID]]

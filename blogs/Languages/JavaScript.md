@@ -2,14 +2,14 @@
 
 ### Variables Decleration
 
-```JavaScript
+```javascript
 var a = 1; // stored to local context.
 b = 1;  // stored to global context.
 ```
 
 ### `typeof`
 
-```JavaScript
+```javascript
 // 5 results:
 typeof "" === "string" // true
 typeof 1 === "number" // true
@@ -25,7 +25,7 @@ typeof null === "object" // true
 
 ### Boolean Operator
 1. Not (!)
-```JavaScript
+```javascript
 !{} === false;
 !"asd" === false;
 !"" === true;
@@ -35,7 +35,7 @@ typeof null === "object" // true
 !NaN === true;
 ```
 2. And (&&)
-```JavaScript
+```javascript
 var a = {};
 a && b; // === b
 true && a; // === a
@@ -48,7 +48,7 @@ null && NaN; // === null;
 NaN && null; // === NaN;
 ```
 3. Or (||)
-```JavaScript
+```javascript
 var a = {};
 a || b; // === a
 false || b; // === b
@@ -56,7 +56,7 @@ null || NaN; === NaN
 ```
 
 ### Compare Operator
-```JavaScript
+```javascript
 11 < 103;
 11 < "103"; // convert String to Number
 "11" > "103";
@@ -74,7 +74,7 @@ a <= 1 // false, a convert to NaN.
 
 ### Function
 1. arguments
-```JavaScript
+```javascript
 function add(v1, v2) {
     return v1 + v2;
 }
@@ -89,7 +89,7 @@ arguments.callee;  // when call a function recursively, use it to decouple the f
 2. call and apply
 3. execution context and scope chain
 4. this
-```JavaScript
+```javascript
 function fx() {
     var that = this;
     return function () {
@@ -99,7 +99,7 @@ function fx() {
 // declare a new variable to store 'this' in closure, just in case the context change. 
 ```
 5. closure
-```JavaScript
+```javascript
 function outer(v1) {
     return function () {
         return v1;
@@ -111,7 +111,7 @@ fx();  // === 5;
 ```
 
 ### Object-oriented
-```JavaScript
+```javascript
 function Animal () {};  // Animal is a function.
 var animal = new Animal();   // Animal is used as a constructor.
 Animal.prototype;   // Animal.prototype can be regarded as its class.

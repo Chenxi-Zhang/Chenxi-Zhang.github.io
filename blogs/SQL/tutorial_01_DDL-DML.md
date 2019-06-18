@@ -4,13 +4,13 @@ mysql -h 0.0.0.0 -P 32834 -u root -p
 ```
 
 # 2. Create database
-```MySQL
+```sql
 DROP DATABASE IF EXISTS my_db;
 CREATE DATABASE my_db;
 USE my_db;
 ```
 # 3. Create table
-```MySQL
+```sql
 DROP TABLE IF EXISTS permission_group;
 CREATE TABLE permission_group
 (
@@ -63,7 +63,7 @@ ALTER TABLE user_new RENAME user;
  */
 ```
 # 5. Insert record
-```MySQL
+```sql
 INSERT INTO permission_group
 (name, visit, publish, reply)
 VALUES
@@ -102,20 +102,20 @@ SELECT * FROM car;
 ```
 
 # 6. Update record
-```MySQL
+```sql
 SELECT * FROM user;
 UPDATE user SET age=26 WHERE person_id=5103;
 SELECT * FROM user;
 ```
 
 # 7. Delete record
-```MySQL
+```sql
 SELECT * FROM car;
 DELETE FROM car WHERE mile>20;
 SELECT * FROM car;
 ```
 # 8. Retrive record
-```MySQL
+```sql
 SELECT * FROM user;
 SELECT id, first_name, age FROM user;
 
@@ -124,13 +124,13 @@ SELECT DISTINCT user_id FROM car;
 SELECT * FROM user WHERE age>30;
 ```
 ## Limit
-```MySQL
+```sql
 SELECT * FROM user ORDER BY age;
 SELECT * FROM user ORDER BY age LIMIT 3;
 SELECT * FROM user ORDER BY age LIMIT 1,2;
 ```
 ## Group by
-```MySQL
+```sql
 SELECT COUNT(1) FROM user;
 SELECT permission_group, COUNT(1) FROM user GROUP BY permission_group;
 SELECT permission_group, COUNT(1) FROM user GROUP BY permission_group WITH ROLLUP;
@@ -138,17 +138,17 @@ SELECT permission_group, COUNT(1) FROM user GROUP BY permission_group HAVING COU
 SELECT SUM(age), AVG(age), MAX(age), MIN(age) FROM user;
 ```
 ## Join
-```MySQL
+```sql
 SELECT id, first_name, last_name, publish FROM user, permission_group WHERE user.permission_group=permission_group.name;
 SELECT id, publish FROM user LEFT JOIN permission_group ON user.permission_group=permission_group.name;
 ```
 ## Subquery
-```MySQL
+```sql
 SELECT * FROM user WHERE permission_group IN (SELECT name FROM permission_group WHERE publish=true);
 SELECT * FROM user WHERE permission_group IN (SELECT name FROM permission_group WHERE visit=true);
 ```
 ## Union / union all
-```MySQL
+```sql
 SELECT * FROM user
 UNION ALL
 SELECT * FROM user;

@@ -1,7 +1,7 @@
 # Stored procedure
     No return required.
 ## Syntax
-```MySQL
+```sql
 CREATE PROCEDURE sp_name ([proc_parameter[,...]])
     [characteristic ...] routine_body
 
@@ -37,7 +37,7 @@ DROP {PROCEDURE|FUNCTION} [IF EXISTS] sp_name;
 ```
 
 e.g.
-```MySQL
+```sql
 
 DROP PROCEDURE IF EXISTS user_older_than;
 DELIMITER $$
@@ -60,7 +60,7 @@ SELECT @a;
 
 ---
 # Check procedure|function status
-```MySQL
+```sql
 SHOW {PROCEDURE | FUNCTION} STATUS [LIKE 'pattern']
 SHOW CREATE {PROCEDURE | FUNCTION} sp_name
 
@@ -74,7 +74,7 @@ SELECT * FROM information_schema.routines WHERE ROUTINE_NAME='user_older_than'\G
 A declared variable only works in BEGIN END block and nested block.
 
 Syntax
-```MySQL
+```sql
 DECLARE var_name[,...] type [DEFAULT value]
 
 e.g.
@@ -82,7 +82,7 @@ DECLARE last_month_start DATE;
 ```
 
 ## Set value
-```MySQL
+```sql
 SET var_name = expr [, var_name = expr] ...
 SELECT col_name[,...] INTO var_name[,...] table_expr
 
@@ -92,7 +92,7 @@ SET IFNULL(AVG(age),0) INTO avg_age FROM user;
 ```
 
 ## Condition and handler
-```MySQL
+```sql
 DECLARE condition_name CONDITION FOR condition_value
 
     condition_value:
@@ -117,7 +117,7 @@ DECLARE handler_type HANDLER FOR condition_value[,...] sp_statement
 ---
 # Cursor
 ## Syntax
-```MySQL
+```sql
 DECLARE cursor_name CURSOR FOR select_statement
 OPEN cursor_name
 FETCH cursor_name INTO var_name [, var_name] ...
@@ -125,7 +125,7 @@ CLOSE cursor_name
 ```
 
 e.g.
-```MySQL
+```sql
 
 
 DROP PROCEDURE IF EXISTS user_age_sum;
@@ -157,7 +157,7 @@ SELECT @x1, SUM(age) FROM user;
 ---
 # Conditional statements
 ## IF
-```MySQL
+```sql
 IF search_condition THEN statement_list
 [ELSEIF search_condition THEN statement_list] ... 
 [ELSE statement_list]
@@ -165,7 +165,7 @@ END IF
 ```
 
 ## CASE
-```MySQL
+```sql
 CASE case_value
 WHEN when_value THEN statement_list
 [WHEN when_value THEN statement_list] ... [ELSE statement_list]
@@ -180,7 +180,7 @@ END CASE
 ```
 
 ## LOOP
-```MySQL
+```sql
 [begin_label:] LOOP
     statement_list
 END LOOP [end_label]
@@ -191,14 +191,14 @@ END LOOP [end_label]
 ## ITERATE [label] ~= (Java) continue
 
 ## REPEAT
-```MySQL
+```sql
 [begin_label:] REPEAT statement_list
 UNTIL search_condition 
 END REPEAT [end_label]
 ```
 
 ## WHILE
-```MySQL
+```sql
 [begin_label:] WHILE search_condition DO
     statement_list
 END WHILE [end_label]
@@ -208,7 +208,7 @@ END WHILE [end_label]
 # MySQL performance test
 
 ## Turn on Query Profile
-```MySQL
+```sql
 SET PROFILING = 1;
 
 #Turn off
@@ -217,7 +217,7 @@ SET PROFILING = 0;
 ```
 
 ## Create tables and procedures
-```MySQL
+```sql
 DROP TABLE IF EXISTS performance_test;
 CREATE TABLE performance_test
 (

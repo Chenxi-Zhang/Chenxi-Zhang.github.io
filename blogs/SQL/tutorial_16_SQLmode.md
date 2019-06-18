@@ -1,6 +1,6 @@
 # SQL mode
 
-```MySQL
+```sql
 SELECT @@sql_mode;
 
 ```

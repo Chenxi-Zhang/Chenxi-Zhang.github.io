@@ -28,7 +28,7 @@ my_db > data.sql
 ```
 4. Maybe modify SET NAMES utf8
 5. Create new database with new default charset
-```MySQL
+```sql
 CREATE DATABASE <database_name> DEFAULT CHARSET utf8;
 ```
 6. Import table structure information

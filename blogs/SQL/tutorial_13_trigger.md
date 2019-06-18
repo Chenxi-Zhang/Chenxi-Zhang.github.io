@@ -1,7 +1,7 @@
 # Trigger
 
 ## Syntax
-```MySQL
+```sql
 CREATE TRIGGER trigger_name trigger_time trigger_event
 ON tbl_name 
 FOR EACH ROW trigger_stmt

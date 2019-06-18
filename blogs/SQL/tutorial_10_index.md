@@ -5,7 +5,7 @@ InnoDB default index is BTREE stored.
 
 SQL syntax of new index:
 
-```MySQL
+```sql
 CREATE [UNIQUE|FULLTEXT|SPATIAL] INDEX index_name
 [USING index_type]
 ON tbl_name (index_col_name, ...)
@@ -15,12 +15,12 @@ index_col_name:
 ```
 
 e.g.
-```MySQL
+```sql
 CREATE INDEX first_name ON user(first_name(10));
 ```
 
 SQL syntax of remove index:
-```MySQL
+```sql
 DROP INDEX index_name ON tbl_name;
 ```
 ---

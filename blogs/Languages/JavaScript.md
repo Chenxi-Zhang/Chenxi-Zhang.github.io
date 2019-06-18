@@ -84,7 +84,6 @@ function add2 () {
     return arguments[0] + arguments[1];
 }
 add2.length === 0;
-
 arguments.callee;  // when call a function recursively, use it to decouple the function name from the function itself. It's better to use anonmyous function. 
 ```
 2. call and apply
@@ -110,7 +109,6 @@ var fx = outer(5);
 fx();  // === 5;
 // Inner function can use the outer function variable because of the scope chain. The activation object of outer function is added to the scope chain of inner class. When the outer function returns, its context and its scope chain are destroyed but its activation object still has at least one referer: scope chain of inner function. 
 ```
-6. 
 
 ### Object-oriented
 ```JavaScript

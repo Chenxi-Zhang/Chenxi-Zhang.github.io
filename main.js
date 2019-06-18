@@ -168,7 +168,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\n  <h1>\n    Chenxi's notes!\n  </h1>\n</div>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-3\">\n      <router-outlet></router-outlet>\n    </div>\n    <div class=\"col-9\">\n      <app-blog-content></app-blog-content>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "<div style=\"text-align:center\" class=\"container header\">\n  <h1>\n    Chenxi's notes!\n  </h1>\n</div>\n\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-3\">\n      <router-outlet></router-outlet>\n    </div>\n    <div class=\"col-9\">\n      <app-blog-content></app-blog-content>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -179,7 +179,7 @@ module.exports = "<div style=\"text-align:center\">\n  <h1>\n    Chenxi's notes!
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQubGVzcyJ9 */"
+module.exports = ".header {\n  padding-top: 5em;\n  padding-bottom: 3em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kYXRhL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQkFBQTtFQUNBLG1CQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50Lmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaGVhZGVyIHtcbiAgcGFkZGluZy10b3A6IDVlbTtcbiAgcGFkZGluZy1ib3R0b206IDNlbTtcbn1cbiIsIi5oZWFkZXIge1xuICBwYWRkaW5nLXRvcDogNWVtO1xuICBwYWRkaW5nLWJvdHRvbTogM2VtO1xufVxuIl19 */"
 
 /***/ }),
 
@@ -276,7 +276,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div *ngIf=\"blog\">\n    <markdown [src]=\"blog.download_url\"></markdown>\n</div>"
+module.exports = "\n<div *ngIf=\"blog\" class=\"border border-dark border-boundary\">\n  <markdown [src]=\"blog.download_url\"></markdown>\n</div>\n"
 
 /***/ }),
 
@@ -287,7 +287,7 @@ module.exports = "\n<div *ngIf=\"blog\">\n    <markdown [src]=\"blog.download_ur
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2Jsb2ctY29udGVudC9ibG9nLWNvbnRlbnQuY29tcG9uZW50Lmxlc3MifQ== */"
+module.exports = ".border-boundary {\n  padding: 1em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kYXRhL3NyYy9hcHAvYmxvZy1jb250ZW50L2Jsb2ctY29udGVudC5jb21wb25lbnQubGVzcyIsInNyYy9hcHAvYmxvZy1jb250ZW50L2Jsb2ctY29udGVudC5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL2Jsb2ctY29udGVudC9ibG9nLWNvbnRlbnQuY29tcG9uZW50Lmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYm9yZGVyLWJvdW5kYXJ5IHtcbiAgcGFkZGluZzogMWVtO1xufVxuIiwiLmJvcmRlci1ib3VuZGFyeSB7XG4gIHBhZGRpbmc6IDFlbTtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -304,16 +304,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _service_blog_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_service/blog.service */ "./src/app/_service/blog.service.ts");
+/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! showdown */ "./node_modules/showdown/dist/showdown.js");
+/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(showdown__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
 var BlogContentComponent = /** @class */ (function () {
     function BlogContentComponent(blogService) {
         this.blogService = blogService;
+        this.converter = new showdown__WEBPACK_IMPORTED_MODULE_3___default.a.Converter();
     }
     BlogContentComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.blogService.blogToDisplay.subscribe(function (b) { return _this.blog = b; });
+    };
+    BlogContentComponent.prototype.render = function (blog) {
+        return this.converter.makeHtml(atob(blog.content));
     };
     BlogContentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
